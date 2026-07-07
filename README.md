@@ -24,7 +24,7 @@ Data sourced from [kongvut/thai-province-data](https://github.com/kongvut/thai-p
 
 ## Base URL
 
-```
+```text  
 https://thai-address-api-373901862529.asia-southeast1.run.app
 ```
 
@@ -152,7 +152,6 @@ served by this API comes from the
 > ข้อมูลเขตการปกครองของไทย (จังหวัด อำเภอ ตำบล ภูมิภาค) ที่ให้บริการผ่าน API นี้
 > นำมาจากโปรเจกต์ [kongvut/thai-province-data](https://github.com/kongvut/thai-province-data)
 > โดย **Kongvut Sangkla** ใช้งานภายใต้สัญญาอนุญาต MIT
-
 > MIT License — Copyright (c) 2025 Kongvut Sangkla
 
 This project does not claim ownership of the underlying dataset. All credit for
@@ -169,7 +168,6 @@ official ISO numeric code — the user-assigned value `926` / `XKX` is used.
 > ข้อมูลอ้างอิงทวีปและประเทศ (195 ประเทศ, 7 ทวีป) ให้บริการจากฐานข้อมูลเดียวกัน — ชื่อไทยและ
 > เมืองหลวงจัดทำเอง ส่วนโค้ด ISO alpha-2 / alpha-3 / numeric และชื่อเมืองหลวงภาษาอังกฤษ
 > อ้างอิงจากมาตรฐานสากล **ISO 3166** (โคโซโวไม่มีเลข ISO numeric อย่างเป็นทางการ จึงใช้ค่า `926` / `XKX`)
-
 > โปรเจกต์นี้ไม่ได้อ้างความเป็นเจ้าของชุดข้อมูลต้นทาง เครดิตทั้งหมดในการรวบรวมและดูแล
 > ข้อมูลเป็นของผู้จัดทำต้นทาง ข้อความสัญญาอนุญาตฉบับเต็มถูกเก็บไว้ในไฟล์ [`LICENSE`](LICENSE)
 > ในส่วน *Third-party data notice* ตามที่สัญญาอนุญาต MIT กำหนด หากนำ API นี้ไปใช้

@@ -1,10 +1,12 @@
 # Thai Address API
 
 A free, open REST API for Thailand's administrative divisions —
-province (จังหวัด), district (อำเภอ), sub-district (ตำบล), and geography/region (ภูมิภาค).
+province (จังหวัด), district (อำเภอ), sub-district (ตำบล), and geography/region (ภูมิภาค) —
+plus world-level continent (ทวีป) and country (ประเทศ) reference data with ISO 3166 codes.
 
 > REST API สาธารณะแบบเปิดสำหรับข้อมูลเขตการปกครองของไทย —
 > จังหวัด, อำเภอ/เขต, ตำบล/แขวง และภูมิภาค
+> พร้อมข้อมูลอ้างอิงระดับโลก ทวีป (continent) และประเทศ (country) พร้อมโค้ด ISO 3166
 
 A small [Go](api/) service acts as a proxy in front of [Supabase](https://supabase.com/)
 (PostgreSQL + PostgREST), keeping the Supabase `apikey` server-side so it never reaches the client.
@@ -36,10 +38,12 @@ All endpoints accept only `GET` and return JSON.
 
 | Method | Path | Description / คำอธิบาย |
 | ------ | ---- | --------------------- |
+| GET | `/api/v1/continents` | Continents / ทวีป |
+| GET | `/api/v1/countries` | Countries / ประเทศ |
+| GET | `/api/v1/geographies` | Geographies, regions / ภูมิภาค |
 | GET | `/api/v1/provinces` | Provinces / จังหวัด |
 | GET | `/api/v1/districts` | Districts / อำเภอ, เขต |
 | GET | `/api/v1/sub-districts` | Sub-districts / ตำบล, แขวง |
-| GET | `/api/v1/geographies` | Geographies, regions / ภูมิภาค |
 
 ### Query parameters (filters) / พารามิเตอร์สำหรับ filter
 
@@ -51,6 +55,18 @@ Every endpoint accepts `id` to fetch a single record. Other filters can be combi
 
 | Endpoint | Query param | Description / คำอธิบาย |
 | -------- | ----------- | --------------------- |
+| `/api/v1/continents` | `id` | filter by continent id / filter ทวีปตาม id |
+| | `code` | filter by continent code (AS, EU, …) / filter ตามโค้ดทวีป |
+| `/api/v1/countries` | `id` | filter by country id, ISO numeric / filter ประเทศตาม id (ISO numeric) |
+| | `iso_alpha2` | filter by ISO alpha-2 code, e.g. TH / filter ตามโค้ด ISO alpha-2 |
+| | `iso_alpha3` | filter by ISO alpha-3 code, e.g. THA / filter ตามโค้ด ISO alpha-3 |
+| | `continent_id` | filter by continent id / filter ตาม id ของทวีป |
+| | `continent_name_th` | filter by continent name, Thai / filter ตามชื่อทวีป (ไทย) |
+| | `continent_name_en` | filter by continent name, English / filter ตามชื่อทวีป (อังกฤษ) |
+| `/api/v1/geographies` | `id` | filter by region id / filter ภูมิภาคตาม id |
+| | `country_id` | filter by country id / filter ตาม id ของประเทศ |
+| | `country_name_th` | filter by country name, Thai / filter ตามชื่อประเทศ (ไทย) |
+| | `country_name_en` | filter by country name, English / filter ตามชื่อประเทศ (อังกฤษ) |
 | `/api/v1/provinces` | `id` | filter by province id / filter จังหวัดตาม id |
 | | `geography_id` | filter by region id / filter ตาม id ของภูมิภาค |
 | | `geography_name` | filter by region name / filter ตามชื่อภูมิภาค |
@@ -63,11 +79,18 @@ Every endpoint accepts `id` to fetch a single record. Other filters can be combi
 | | `district_name_th` | filter by district name, Thai / filter ตามชื่ออำเภอ (ไทย) |
 | | `district_name_en` | filter by district name, English / filter ตามชื่ออำเภอ (อังกฤษ) |
 | | `province_id` | filter by province id via district / filter ตาม id ของจังหวัด (ผ่านอำเภอ) |
-| `/api/v1/geographies` | `id` | filter by region id / filter ภูมิภาคตาม id |
 
 ### Examples / ตัวอย่าง
 
 ```bash
+# All continents / countries — ทวีป / ประเทศทั้งหมด
+curl "https://thai-address-api-373901862529.asia-southeast1.run.app/api/v1/continents"
+curl "https://thai-address-api-373901862529.asia-southeast1.run.app/api/v1/countries"
+
+# Country by ISO code / countries in a continent — ประเทศตามโค้ด ISO / ประเทศในทวีป
+curl "https://thai-address-api-373901862529.asia-southeast1.run.app/api/v1/countries?iso_alpha2=TH"
+curl "https://thai-address-api-373901862529.asia-southeast1.run.app/api/v1/countries?continent_name_en=Asia"
+
 # All provinces / จังหวัดทั้งหมด
 curl "https://thai-address-api-373901862529.asia-southeast1.run.app/api/v1/provinces"
 
@@ -137,6 +160,15 @@ collecting and maintaining the data goes to the upstream author. The full upstre
 license text is preserved in [`LICENSE`](LICENSE) under the *Third-party data notice*
 section, as required by the MIT License. If you use this API, please keep the same
 attribution to the original data source.
+
+The continent and country reference data (195 countries, 7 continents) is served from the
+same database. Thai names and capitals are curated in-house; ISO alpha-2 / alpha-3 / numeric
+codes and English capitals are derived from the public **ISO 3166** standard. Kosovo has no
+official ISO numeric code — the user-assigned value `926` / `XKX` is used.
+
+> ข้อมูลอ้างอิงทวีปและประเทศ (195 ประเทศ, 7 ทวีป) ให้บริการจากฐานข้อมูลเดียวกัน — ชื่อไทยและ
+> เมืองหลวงจัดทำเอง ส่วนโค้ด ISO alpha-2 / alpha-3 / numeric และชื่อเมืองหลวงภาษาอังกฤษ
+> อ้างอิงจากมาตรฐานสากล **ISO 3166** (โคโซโวไม่มีเลข ISO numeric อย่างเป็นทางการ จึงใช้ค่า `926` / `XKX`)
 
 > โปรเจกต์นี้ไม่ได้อ้างความเป็นเจ้าของชุดข้อมูลต้นทาง เครดิตทั้งหมดในการรวบรวมและดูแล
 > ข้อมูลเป็นของผู้จัดทำต้นทาง ข้อความสัญญาอนุญาตฉบับเต็มถูกเก็บไว้ในไฟล์ [`LICENSE`](LICENSE)

@@ -3,3 +3,6 @@
 thai-address-api-deployment-guide.md
 
 *.exe
+
+/data/*.csv
+/sql/*.sql

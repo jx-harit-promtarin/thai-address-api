@@ -8,8 +8,8 @@ import (
 	"os"
 	"strconv"
 
-	"golang.org/x/time/rate"
 	// "github.com/joho/godotenv"
+	"golang.org/x/time/rate"
 )
 
 var (
@@ -161,6 +161,23 @@ func main() {
 		return withCORS(limiter.withRateLimit(h))
 	}
 
+	http.HandleFunc("/api/v1/continents", guard(filteredHandler(
+		"continent",
+		map[string]string{"id": "id", "code": "code"},
+		"",
+		nil,
+	)))
+	http.HandleFunc("/api/v1/countries", guard(filteredHandler(
+		"country",
+		map[string]string{
+			"id":           "id",
+			"iso_alpha2":   "iso_alpha2",
+			"iso_alpha3":   "iso_alpha3",
+			"continent_id": "continent_id",
+		},
+		"continent",
+		map[string]string{"continent_name_th": "name_th", "continent_name_en": "name_en"},
+	)))
 	http.HandleFunc("/api/v1/provinces", guard(filteredHandler(
 		"province",
 		map[string]string{"id": "id", "geography_id": "geography_id"},
@@ -185,9 +202,9 @@ func main() {
 	)))
 	http.HandleFunc("/api/v1/geographies", guard(filteredHandler(
 		"geography",
-		map[string]string{"id": "id"},
-		"",
-		nil,
+		map[string]string{"id": "id", "country_id": "country_id"},
+		"country",
+		map[string]string{"country_name_th": "name_th", "country_name_en": "name_en"},
 	)))
 
 	port := os.Getenv("PORT")

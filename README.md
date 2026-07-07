@@ -17,8 +17,8 @@ Data sourced from [kongvut/thai-province-data](https://github.com/kongvut/thai-p
 
 > ข้อมูลนำมาจาก [kongvut/thai-province-data](https://github.com/kongvut/thai-province-data) (สัญญาอนุญาต MIT)
 
-☕ If this API is useful to you, consider [supporting the project](#donate--สนับสนุนโปรเจกต์).
-&nbsp;·&nbsp; ถ้า API นี้มีประโยชน์ ฝาก [สนับสนุนโปรเจกต์](#donate--สนับสนุนโปรเจกต์) ด้วยนะครับ
+☕ If this API is useful to you, consider [supporting the project](#support--tip--สนับสนุนโปรเจกต์).
+&nbsp;·&nbsp; ถ้า API นี้มีประโยชน์ ฝาก [สนับสนุนโปรเจกต์](#support--tip--สนับสนุนโปรเจกต์) ด้วยนะครับ
 
 ## Base URL
 
@@ -100,10 +100,18 @@ Supabase + Cloud Run deployment walkthrough.
 > endpoint/parameter ฉบับเต็มได้ที่ [`api/README.md`](api/README.md) และดูขั้นตอน deploy บน
 > Supabase + Cloud Run ได้ที่ [`thai-address-api-deployment-guide.md`](thai-address-api-deployment-guide.md)
 
-## Donate / สนับสนุนโปรเจกต์
+## Support / Tip / สนับสนุนโปรเจกต์
 
 If this API saves you time, buying me a coffee is appreciated 🙏
 &nbsp;·&nbsp; ถ้า API นี้ช่วยประหยัดเวลาคุณ เลี้ยงกาแฟกันสักแก้วก็ยินดีมากครับ 🙏
+
+> **This is a voluntary tip, not a purchase.** It is not tied to any API access or
+> feature — the API stays completely free for everyone whether you tip or not. Tipping
+> buys you no extra rights, quota, or support tier.
+>
+> **นี่คือการให้ทิปตามความสมัครใจ ไม่ใช่การซื้อสิทธิ์ใด ๆ** — การจ่ายเงินนี้ไม่ผูกกับสิทธิ์
+> การใช้งานหรือฟีเจอร์ใด ๆ ทั้งสิ้น API ยังใช้ได้ฟรีเหมือนเดิมสำหรับทุกคน ไม่ว่าจะให้ทิปหรือไม่ก็ตาม
+> การให้ทิปไม่ได้ทำให้คุณได้สิทธิ์ โควตา หรือระดับการซัพพอร์ตเพิ่มเติมแต่อย่างใด
 
 [![ko-fi](https://img.shields.io/badge/Support%20me%20on-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/haritpromtarin)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/haritpromt8)
